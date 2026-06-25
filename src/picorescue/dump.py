@@ -173,9 +173,12 @@ def scan_for_partitions(image: FlashImage) -> list[Partition]:
         # block. The superblock's inline struct gives us the geometry, so we can
         # size the partition and skip past it (avoiding the block-1 pair copy).
         if data[off + 8:off + 16] == LFS_MAGIC:
-            block_size = struct.unpack_from("<I", data, off + 0x18)[0]
-            block_count = struct.unpack_from("<I", data, off + 0x1C)[0]
-            size = block_size * block_count
+            # Replay the superblock log for the real geometry — a fixed-offset
+            # read would catch a stale pre-fs_grow block_count.
+            from . import lfs
+            sb = lfs.read_superblock(data[off:off + 2 * RP_FLASH_BLOCK_SIZE])
+            block_size = sb["block_size"] if sb else RP_FLASH_BLOCK_SIZE
+            size = (sb["block_size"] * sb["block_count"]) if sb else 0
             sane = (
                 block_size in (256, 512, 1024, 2048, 4096, 8192)
                 and 0 < size <= len(data) - off

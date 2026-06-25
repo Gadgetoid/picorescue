@@ -59,17 +59,59 @@ def block_count_for(size: int, block_size: int = DEFAULT_BLOCK_SIZE) -> int:
     return size // block_size
 
 
-def superblock_block_count(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE) -> int | None:
-    """The block_count recorded in the LittleFS superblock, if present.
+def read_superblock(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE) -> dict | None:
+    """Parse the LittleFS superblock by replaying the metadata-pair log.
 
-    NOTE: this can be unreliable for images built with ``dir2uf2 --fs-compact``,
-    which compact into the low blocks then ``fs_grow`` to the device size — the
-    stored count may reflect the pre-grow size. Prefer the partition size.
+    The superblock lives in the metadata pair {block 0, block 1}; the active
+    block is the one with the higher revision, and within it the *last*
+    superblock-struct commit wins. This matters for ``dir2uf2 --fs-compact``
+    images: ``fs_grow`` appends a fresh superblock commit with the grown
+    block_count, so a fixed-offset read would return the stale pre-grow value.
+
+    Returns {"version", "block_size", "block_count", "rev"} or None.
     """
-    if len(data) >= 0x20 and data[8:16] == LFS_MAGIC:
-        bc = struct.unpack_from("<I", data, 0x1C)[0]
-        if 0 < bc <= (1 << 24):
-            return bc
+    best: tuple[int, int, int, int] | None = None  # (rev, version, bs, bc)
+    for b in (0, 1):
+        block = data[b * block_size:(b + 1) * block_size]
+        if len(block) < 0x20 or block[8:16] != LFS_MAGIC:
+            continue
+        rev = struct.unpack_from("<I", block, 0)[0]
+        geom: tuple[int, int, int] | None = None
+        pos = 4
+        ptag = 0xFFFFFFFF
+        while pos + 4 <= len(block):
+            (raw,) = struct.unpack_from(">I", block, pos)
+            if raw == 0xFFFFFFFF:
+                break
+            tag = raw ^ ptag
+            ptag = tag
+            if (tag >> 31) & 1:  # invalid tag — end of usable log
+                break
+            type3 = (tag >> 20) & 0x7FF
+            type_id = (tag >> 10) & 0x3FF
+            length = tag & 0x3FF
+            pos += 4
+            if length == 0x3FF:
+                continue
+            if pos + length > len(block):
+                break
+            payload = block[pos:pos + length]
+            pos += length
+            if type3 == LFS_TYPE_INLINE and type_id == 0 and length >= 12:
+                geom = struct.unpack_from("<III", payload, 0)  # keep last commit
+        if geom is not None and (best is None or rev >= best[0]):
+            best = (rev, *geom)
+    if best is None:
+        return None
+    rev, version, bs, bc = best
+    return {"version": version, "block_size": bs, "block_count": bc, "rev": rev}
+
+
+def superblock_block_count(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE) -> int | None:
+    """The authoritative (latest-commit) block_count from the superblock."""
+    sb = read_superblock(data, block_size)
+    if sb and 0 < sb["block_count"] <= (1 << 24):
+        return sb["block_count"]
     return None
 
 

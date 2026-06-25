@@ -21,6 +21,13 @@ uv sync
 uv run picorescue --help
 ```
 
+or, from pip:
+
+```bash
+uv pip install picorescue
+uv run picorescue --help
+```
+
 Accepts a raw flash dump (`.bin`, offset 0 = flash base `0x10000000`) or a `.uf2`
 (reassembled to the correct flash addresses, gaps filled with `0xFF`).
 

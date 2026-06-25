@@ -1,0 +1,84 @@
+version = 1
+revision = 3
+requires-python = ">=3.11"
+
+[[package]]
+name = "click"
+version = "8.4.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/76/d4/81420972a676e8ffea40450d8c8c92943e7218a78fe9b64359836cc9876b/click-8.4.2.tar.gz", hash = "sha256:9a6cea6e60b17ebe0a44c5cc636d94f09bd66142c1cd7d8b4cd731c4917a15f6", size = 338000, upload-time = "2026-06-24T17:45:15.148Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fb/e2/79c688af8b210d232694e31e59da9f6ec747bae31c3f5946e4e9b98860d5/click-8.4.2-py3-none-any.whl", hash = "sha256:e6f9f66136c816745b9d65817da91d61d957fb16e02e4dcd0552553c5a197b76", size = 119243, upload-time = "2026-06-24T17:45:13.73Z" },
+]
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44", size = 27697, upload-time = "2022-10-25T02:36:22.414Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6", size = 25335, upload-time = "2022-10-25T02:36:20.889Z" },
+]
+
+[[package]]
+name = "littlefs-python"
+version = "0.18.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bc/ce/18c356eb3fa1881206d306b05ef0368baabf5095d99c8f7c1fa239de2949/littlefs_python-0.18.0.tar.gz", hash = "sha256:a867affd05b381b315db827b10851f8e64db94cb30eec4083f4b442aceb20ff8", size = 526158, upload-time = "2026-06-05T00:56:47.745Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7c/0d/b6f5ebd7371d4176d91165e18e144621ba2ff00a2b0f954263fe41065ca1/littlefs_python-0.18.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:fb9ed46073efc0f6f0579bdabaaa46de4bd47e3c72355f2ad75ab1e81bfda2bb", size = 182773, upload-time = "2026-06-05T00:55:42.92Z" },
+    { url = "https://files.pythonhosted.org/packages/3d/3a/b19c53e7f451b6c4426ddf227fbd3378babbab16aa42d8cbd981b47f427d/littlefs_python-0.18.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:35837b3f1a24d81557e5c96203dd0d103401d2a1470787d70110c07679aff9b1", size = 176268, upload-time = "2026-06-05T00:55:43.965Z" },
+    { url = "https://files.pythonhosted.org/packages/4e/fc/9f4a25b6c709a3b082d2ba706f140c7914136c4c7803a86ff43901a8182a/littlefs_python-0.18.0-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:65cf494f75039fe9bdabc54e63d0766e9b837c9447889a3ca2930f4050f75245", size = 962086, upload-time = "2026-06-05T00:55:44.929Z" },
+    { url = "https://files.pythonhosted.org/packages/d6/81/4af3edfc6c02d836f464f86fe17379e4a447d27299b89a522837278831cf/littlefs_python-0.18.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f17f42088ef965255427cd5a703211ed3a09ac777a4fd0aa817bda097032a0c6", size = 1003283, upload-time = "2026-06-05T00:55:46.051Z" },
+    { url = "https://files.pythonhosted.org/packages/93/d5/842af11716e1c94d9d0d8861a28a043e640cc754a75617ef4a25200df386/littlefs_python-0.18.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:80d1eeaaf60ca37eb13430568963e72672b8e43dbe2b3348491521636276d8c2", size = 1011631, upload-time = "2026-06-05T00:55:47.149Z" },
+    { url = "https://files.pythonhosted.org/packages/7f/92/ebfce60c234bbe08721e91371da544af337afa48c573615276326f21446f/littlefs_python-0.18.0-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:793f566a67d82beaff36bf92c4deb5c0bf8b518d7f5852f1bcff8a4df63b9811", size = 970036, upload-time = "2026-06-05T00:55:48.443Z" },
+    { url = "https://files.pythonhosted.org/packages/e5/c7/42270187ba3053b19d9263da7cb091bd577f9c943886df8ab286af62ac58/littlefs_python-0.18.0-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:15ce5234f7106baab6b12421fdd10334ebddb88449e356b9bf33eeb2acce97ca", size = 999790, upload-time = "2026-06-05T00:55:49.811Z" },
+    { url = "https://files.pythonhosted.org/packages/2b/5e/22077cb89ae1b05568313520e90b97f8d9a8fb5ae16230d25138a519d160/littlefs_python-0.18.0-cp311-cp311-win32.whl", hash = "sha256:3617c87b8297c42439ed9ff936984fbfefa5a0edc1c9e5a01b43f8fee23ec4d9", size = 130928, upload-time = "2026-06-05T00:55:51.345Z" },
+    { url = "https://files.pythonhosted.org/packages/5b/bb/be9da88e83b3c94866262ab605b8e3540dc236abf23199974ee6d5c0796f/littlefs_python-0.18.0-cp311-cp311-win_amd64.whl", hash = "sha256:1898a5f3de7372f375c495eb442822a3a6ae915c46d0cfc02297c659e5dfdb3b", size = 156301, upload-time = "2026-06-05T00:55:52.275Z" },
+    { url = "https://files.pythonhosted.org/packages/32/66/38265979c877fe63c172cbf6aaceb3ff462ae348486716cf91a6d5436659/littlefs_python-0.18.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:ab4d5d736af73b5e4fc79a98646f3c6071416e34de2b78d356002df9b7a6e0df", size = 187447, upload-time = "2026-06-05T00:55:53.269Z" },
+    { url = "https://files.pythonhosted.org/packages/e9/4a/1202d497acc1ab66b26f81c4617d285b4e30519cc72b700ca88221b09e12/littlefs_python-0.18.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:9375322fa8a70bf0de21176f5f1c59cadfa822692c05a164114236123affb6f1", size = 180075, upload-time = "2026-06-05T00:55:54.248Z" },
+    { url = "https://files.pythonhosted.org/packages/40/c8/6499f0225781458d168d31fa4906930d8ddc8d26c8187638bd8179946608/littlefs_python-0.18.0-cp312-cp312-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:821a6eec75e5d6cbc0fb504ca55f84e100ed426ff58102cfa7c27e139db80196", size = 961666, upload-time = "2026-06-05T00:55:55.398Z" },
+    { url = "https://files.pythonhosted.org/packages/7c/3b/a9a1f03875095872bd4b4addd73c2a560843cabc719f63e4086b909ae307/littlefs_python-0.18.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d5dccde1e516d79299dfb8f4b86a95519a405569f45e8e8ca8066304c0ca703e", size = 990286, upload-time = "2026-06-05T00:55:56.527Z" },
+    { url = "https://files.pythonhosted.org/packages/ef/c0/c455991879ff438c783a4d398ca1e4b10cf807d3d60654b79582297f7c2d/littlefs_python-0.18.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:bec66b3fd04b46c4a3462ffe1470d3887e6053b75e5c78093dac0ad19b926a25", size = 1026082, upload-time = "2026-06-05T00:55:57.658Z" },
+    { url = "https://files.pythonhosted.org/packages/e6/4e/3f7ec339a351083a610f2e1b9e8947b03a56a4d68038903c0343075a5cd7/littlefs_python-0.18.0-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:f060b3343355a241a598a4252b18efab34956fb23e937261cdfec333c072d835", size = 965559, upload-time = "2026-06-05T00:55:58.762Z" },
+    { url = "https://files.pythonhosted.org/packages/57/6b/825bd4802dd35efe0aa81ad50e3cf8cc610864da5bd814bf2cdb0fe63b39/littlefs_python-0.18.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:347ed0aa58c1849ebc5f0dbc1fbd7f51b79214f4b6ac04d8d3650d33e6da7bfe", size = 1001735, upload-time = "2026-06-05T00:56:00.248Z" },
+    { url = "https://files.pythonhosted.org/packages/33/ad/ea6ace39ae06c2d4987af495de2cd7070a39db1f5778c5692c2f3837002b/littlefs_python-0.18.0-cp312-cp312-win32.whl", hash = "sha256:06deb06d74db33a615f5ddcb29490496e2c24cdaf7988b04a4d759cef207a041", size = 132035, upload-time = "2026-06-05T00:56:01.332Z" },
+    { url = "https://files.pythonhosted.org/packages/f3/1c/26f9f81e3b41bf1d11f1c2a058566afd6b1a958a02fb1be71d69b93e4c4f/littlefs_python-0.18.0-cp312-cp312-win_amd64.whl", hash = "sha256:8f5d9086dea99e59fcd9b49990295ecff71af22f7853f5fb6acf1cb19901458a", size = 156816, upload-time = "2026-06-05T00:56:02.206Z" },
+    { url = "https://files.pythonhosted.org/packages/16/20/dc4908efaca07fea1b80978f287e15f5dde75ecadc1c3cec9e8e410a0ca9/littlefs_python-0.18.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:05bdfe491d57a1cb8decdb529379a414d96d1eb92710cd30658b3fbca41d38c5", size = 188899, upload-time = "2026-06-05T00:56:03.157Z" },
+    { url = "https://files.pythonhosted.org/packages/85/31/4e864fc6f956434d68bb3c84de896060c3f91de7cb7891b349656130714f/littlefs_python-0.18.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:f98afc5541fa5c73140f03a907e9d18c1609f99fd9ca3db16b76c236e2f0ab20", size = 181855, upload-time = "2026-06-05T00:56:04.13Z" },
+    { url = "https://files.pythonhosted.org/packages/00/6b/c1829dbe18f8f2bba17b78f8c9f4542e6193bc0cb48b3954a26352cb5ba8/littlefs_python-0.18.0-cp313-cp313-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:e2a43f82261beece94adb50e9746152cc1e522ccdb8843e8c51bd63115bc3344", size = 938048, upload-time = "2026-06-05T00:56:05.252Z" },
+    { url = "https://files.pythonhosted.org/packages/50/b5/5dc9079fe0585cd0228009b565dd18f7e743df8ff25ca99d25ca54c9f8ce/littlefs_python-0.18.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:414929b9bcc2b467ab20f75d1c9de53cba1e71b4798704730be767aaec2141e5", size = 981559, upload-time = "2026-06-05T00:56:06.731Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/29/b2951b28263191a60802bd692ac7562d8447dd6ca4cf914ed4bcd5af5fa3/littlefs_python-0.18.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a392a35beaf340f000b6618e1a1fdaa8a85faf772ccb9f99a6b48590c7182109", size = 1003991, upload-time = "2026-06-05T00:56:07.875Z" },
+    { url = "https://files.pythonhosted.org/packages/04/32/67d905bd6695f89a6c2a997b59aa7a92fb3ae6ac67d4ed64af5dfa9b808a/littlefs_python-0.18.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:b3aec460d3f4997bd6df2bb9d218f88dcb5cee50b8b32c737b39cec361912c79", size = 941088, upload-time = "2026-06-05T00:56:09.259Z" },
+    { url = "https://files.pythonhosted.org/packages/77/94/2224af875583397d7bc4b758a02ada4e68f05362d75a9882775349f784a4/littlefs_python-0.18.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:7f050788281ad853742ced60027564eea37abc3cd4c5fbc2fa25801bb559cf59", size = 981306, upload-time = "2026-06-05T00:56:10.908Z" },
+    { url = "https://files.pythonhosted.org/packages/0c/ea/3cb64b0da4ad33bbb39b979b0b16a6ebcefe67b993f11054cd76df406eb9/littlefs_python-0.18.0-cp313-cp313-win32.whl", hash = "sha256:764f44fdff21d11d933efe4f8ec081f814e34e9bd74ada4f7ec08ed6baf043d5", size = 132279, upload-time = "2026-06-05T00:56:12.353Z" },
+    { url = "https://files.pythonhosted.org/packages/bd/58/763c87c24fcae0a6f722f6b7a9b6d109e110ff800470af939a393f55897c/littlefs_python-0.18.0-cp313-cp313-win_amd64.whl", hash = "sha256:1b350fbf6c8b0cc32cb97ca629d8ee0ce3ae901c5f3b322c080c8a98a0dbbda1", size = 157207, upload-time = "2026-06-05T00:56:13.314Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/54/708a7e9a2d7ce8e7be36f77596fab42254e7b6bab49d481cc7df3f46206d/littlefs_python-0.18.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:9c0798eef7a6d29da7993982d2f3c99365b899acff97fd439650ee4929106720", size = 189262, upload-time = "2026-06-05T00:56:14.299Z" },
+    { url = "https://files.pythonhosted.org/packages/79/df/f56015d34115583d877056228ed198328dbeabbf8de4591bf4af97d2446d/littlefs_python-0.18.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:d9f9692d14b2012589a0168db309dd22b362acb92537619218c08050bf9e6f36", size = 182310, upload-time = "2026-06-05T00:56:15.35Z" },
+    { url = "https://files.pythonhosted.org/packages/09/41/46e90eb17d2274b2f6148b4e06d78934350595817464c5698ca41256266e/littlefs_python-0.18.0-cp314-cp314-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:2d9f67843c15578a1d8942d4dfefff203d7edf80ccebbac42880cc0083954e19", size = 939516, upload-time = "2026-06-05T00:56:16.544Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/2c/ad9e53d2fd4f218a3d90dc4baf2762adb1f4370f1b6cdf12de90468d879d/littlefs_python-0.18.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e7fe3852fd702312bacbda6118d3048a8c64e4666021f1929bad9224d71b38a3", size = 981591, upload-time = "2026-06-05T00:56:17.959Z" },
+    { url = "https://files.pythonhosted.org/packages/d3/4f/c3aeb89ee5d79347550f0c9699ff04eacc9a376dd0245992a1501ac73e9f/littlefs_python-0.18.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a52ac740ca4f51b0f117a747d30f394e8d347d2e1a969d6d7a3c1ec33f138228", size = 995030, upload-time = "2026-06-05T00:56:19.491Z" },
+    { url = "https://files.pythonhosted.org/packages/10/a8/a7eb4077253cad5eea47266f050c2e6c3c4aba04640c625ad97a2029a3d3/littlefs_python-0.18.0-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:e5e8ef9aee9ed7fd60525761084f09875a7c6b08d62fb62b8a55a8bc3aeda313", size = 941007, upload-time = "2026-06-05T00:56:20.757Z" },
+    { url = "https://files.pythonhosted.org/packages/cf/bf/a4515732c1555c0ec89d112b0a9d8d50789860a481331818aed4dbcc0bcf/littlefs_python-0.18.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:741968bc501587534ea992e33cc68690a47d03f34cfb9b18cf2fe5b955d31257", size = 974257, upload-time = "2026-06-05T00:56:22.119Z" },
+    { url = "https://files.pythonhosted.org/packages/9a/e7/aa92927b8c65ca48f64e9a5383b1005bf2d777d4fc42e7fb4a7f157e9b78/littlefs_python-0.18.0-cp314-cp314-win32.whl", hash = "sha256:837bb6b223c2fe6e2f37abfaa142b904c3121f223d1a4cdbe716c6b44768cb5c", size = 135623, upload-time = "2026-06-05T00:56:23.441Z" },
+    { url = "https://files.pythonhosted.org/packages/77/a2/355f0d3fcf633e7f53a29aafc5bb5cfb110377daf9db2e42dbd05b5df519/littlefs_python-0.18.0-cp314-cp314-win_amd64.whl", hash = "sha256:06bbf7fb22f36397adef373a96014fae6d1b0d341d6fbb7a798fbf6aabc4d3eb", size = 160839, upload-time = "2026-06-05T00:56:24.42Z" },
+    { url = "https://files.pythonhosted.org/packages/48/9f/d5369bc9137a8eb83c425ad19d766bb5cdfd0bf79c8d9aed4773aa9ad984/littlefs_python-0.18.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:cfbe06f1b5304a0fc9936aa12d137723537f5be2c3a8ae218a2616b4a7505f7e", size = 194977, upload-time = "2026-06-05T00:56:25.464Z" },
+]
+
+[[package]]
+name = "picorescue"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "click" },
+    { name = "littlefs-python" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.1" },
+    { name = "littlefs-python", specifier = ">=0.12" },
+]

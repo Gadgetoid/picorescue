@@ -5,7 +5,7 @@ Two layers:
 * :func:`mount` / :func:`list_files` / :func:`extract_all` use ``littlefs-python``
   to read the *live* filesystem (the latest, consistent view).
 * :func:`recover_metadata` walks the raw metadata-block logs to surface entries
-  from *stale* commits — i.e. files that were deleted or overwritten but whose
+  from *stale* commits - i.e. files that were deleted or overwritten but whose
   older commit (name + inline data) has not yet been erased.
 
 The metadata walker is intentionally defensive and best-effort: it threads the
@@ -85,7 +85,7 @@ def read_superblock(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE) -> dict |
                 break
             tag = raw ^ ptag
             ptag = tag
-            if (tag >> 31) & 1:  # invalid tag — end of usable log
+            if (tag >> 31) & 1:  # invalid tag - end of usable log
                 break
             type3 = (tag >> 20) & 0x7FF
             type_id = (tag >> 10) & 0x3FF
@@ -216,8 +216,8 @@ def _block_entries(block: bytes):
     across all commits, or None if the block isn't a clean metadata log.
 
     Names and their (possibly later-committed) inline data are matched by tag
-    id within the block. The block-validity gate — every tag valid (bit 31
-    clear), every length in-bounds, and at least one CRC tag — is what keeps raw
+    id within the block. The block-validity gate - every tag valid (bit 31
+    clear), every length in-bounds, and at least one CRC tag - is what keeps raw
     file-data (CTZ) blocks from being mined for spurious entries.
     """
     if len(block) < 8:
@@ -229,7 +229,7 @@ def _block_entries(block: bytes):
     inlines: list[tuple[int, bytes]] = []         # (id, data) in commit order
     while pos + 4 <= len(block):
         (raw,) = struct.unpack_from(">I", block, pos)
-        if raw == 0xFFFFFFFF:  # erased tail — end of log
+        if raw == 0xFFFFFFFF:  # erased tail - end of log
             break
         tag = raw ^ ptag
         ptag = tag
@@ -253,7 +253,7 @@ def _block_entries(block: bytes):
         elif type3 == LFS_TYPE_INLINE and payload:
             inlines.append((type_id, payload))
     if not saw_crc:
-        return None  # no commit delimiter — treat as not-metadata
+        return None  # no commit delimiter - treat as not-metadata
 
     out: list[tuple[bytes, int, bytes | None]] = []
     for type_id, data in inlines:
@@ -270,7 +270,7 @@ def recover_metadata(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE) -> list[
 
     Includes stale entries (deleted / overwritten). De-duplicated by
     (name, inline_data). CTZ-backed (large) files and directories come back as
-    name-only hints — their data isn't inline, so carve for the contents.
+    name-only hints - their data isn't inline, so carve for the contents.
     """
     found: list[RecoveredEntry] = []
     seen: set[tuple] = set()
@@ -311,7 +311,7 @@ def recover_metadata(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE) -> list[
                     continue
                 seen.add((name, None))
                 note = ("directory entry" if ftype == LFS_TYPE_DIR
-                        else "name only (CTZ/large file — data not inline, try carving)")
+                        else "name only (CTZ/large file - data not inline, try carving)")
                 found.append(RecoveredEntry(
                     name=name, file_type=ftype, block=b,
                     inline_data=None, note=note,

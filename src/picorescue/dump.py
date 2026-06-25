@@ -173,7 +173,7 @@ def scan_for_partitions(image: FlashImage) -> list[Partition]:
         # block. The superblock's inline struct gives us the geometry, so we can
         # size the partition and skip past it (avoiding the block-1 pair copy).
         if data[off + 8:off + 16] == LFS_MAGIC:
-            # Replay the superblock log for the real geometry — a fixed-offset
+            # Replay the superblock log for the real geometry - a fixed-offset
             # read would catch a stale pre-fs_grow block_count.
             from . import lfs
             sb = lfs.read_superblock(data[off:off + 2 * RP_FLASH_BLOCK_SIZE])
@@ -211,7 +211,7 @@ def discover(image: FlashImage) -> list[Partition]:
     """Return partitions from bi_decl, merged with a signature scan.
 
     bi_decl declarations are authoritative for the regions they cover, but they
-    can miss filesystems *nested* inside a declared block device — e.g. the
+    can miss filesystems *nested* inside a declared block device - e.g. the
     ``dir2uf2 --fs-reserve`` hybrid where a LittleFS is tucked into the tail of
     a FAT partition. So we always scan and fold in any filesystem the
     declarations don't already account for.
@@ -225,7 +225,7 @@ def discover(image: FlashImage) -> list[Partition]:
         if s.address in declared_addrs:
             continue  # same region already named by bi_decl
         # A scanned FS that starts inside a declared partition is a real,
-        # separate filesystem (hybrid layout) — keep it, but note its parent.
+        # separate filesystem (hybrid layout) - keep it, but note its parent.
         parent = next(
             (p for p in declared if p.address <= s.address < p.address + p.size),
             None,

@@ -1,4 +1,4 @@
-"""picorescue — inspect and recover LittleFS/FAT partitions from Pico flash dumps."""
+"""picorescue - inspect and recover LittleFS/FAT partitions from Pico flash dumps."""
 from __future__ import annotations
 
 import json
@@ -115,7 +115,7 @@ def ls(dump_path, partition):
             except Exception as e:
                 click.echo(f"  ! parse failed: {e}")
         else:
-            click.echo("  (unknown filesystem — try `recover` to carve)")
+            click.echo("  (unknown filesystem - try `recover` to carve)")
 
 
 @cli.command()
@@ -157,7 +157,7 @@ def extract(dump_path, outdir, partition):
               help="Also carve the entire dump, not just known partitions.")
 @click.option("--min-score", type=float, default=6.0, help="Carver score threshold.")
 def recover(dump_path, outdir, partition, carve_, whole_dump, min_score):
-    """Recover deleted/orphaned data — primarily Python scripts.
+    """Recover deleted/orphaned data - primarily Python scripts.
 
     Writes into OUTDIR/<partition>/{metadata,undelete,carved}/ plus a
     MANIFEST.json describing every recovered item and how it was found.
@@ -174,7 +174,7 @@ def recover(dump_path, outdir, partition, carve_, whole_dump, min_score):
     for p in parts:
         buf = image.slice(p)
         base = out / p.name
-        click.echo(f"\n# {p.name} ({p.fs_type}) @ {p.address:#010x} — {_human(len(buf))}")
+        click.echo(f"\n# {p.name} ({p.fs_type}) @ {p.address:#010x} - {_human(len(buf))}")
 
         if p.fs_type == "littlefs":
             live_names: set[str] = set()

@@ -100,7 +100,7 @@ def ls(dump_path, partition):
         buf = image.slice(p)
         if p.fs_type == "littlefs":
             try:
-                fs = lfs.mount(buf)
+                fs = lfs.mount(buf, block_count=_lfs_bc(p))
                 for f in lfs.list_files(fs):
                     click.echo(f"  {f.size:>8}  {f.path}")
             except Exception as e:
@@ -131,7 +131,7 @@ def extract(dump_path, outdir, partition):
         dest = out / p.name
         buf = image.slice(p)
         if p.fs_type == "littlefs":
-            fs = lfs.mount(buf)
+            fs = lfs.mount(buf, block_count=_lfs_bc(p))
             for f in lfs.extract_all(fs):
                 if f.data is None:
                     continue
@@ -179,7 +179,7 @@ def recover(dump_path, outdir, partition, carve_, whole_dump, min_score):
         if p.fs_type == "littlefs":
             live_names: set[str] = set()
             try:
-                fs = lfs.mount(buf)
+                fs = lfs.mount(buf, block_count=_lfs_bc(p))
                 for f in lfs.extract_all(fs):
                     live_names.add(f.path.rsplit("/", 1)[-1])
                     if f.data is not None:
@@ -272,6 +272,12 @@ def _carve_to(buf, dest, min_score, known, manifest, part_name, method) -> int:
         })
         n += 1
     return n
+
+
+def _lfs_bc(p) -> int | None:
+    """Block count implied by a partition's declared size (authoritative for
+    --fs-compact images whose superblock count is stale)."""
+    return (p.size // lfs.DEFAULT_BLOCK_SIZE) or None if p.size else None
 
 
 def _clean(name: str) -> str:

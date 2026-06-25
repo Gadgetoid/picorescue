@@ -59,19 +59,58 @@ def block_count_for(size: int, block_size: int = DEFAULT_BLOCK_SIZE) -> int:
     return size // block_size
 
 
-def mount(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE,
-          read_size: int = DEFAULT_READ_SIZE, prog_size: int = DEFAULT_PROG_SIZE) -> LittleFS:
-    """Mount a LittleFS image from a bytes buffer."""
-    block_count = max(1, len(data) // block_size)
+def superblock_block_count(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE) -> int | None:
+    """The block_count recorded in the LittleFS superblock, if present.
+
+    NOTE: this can be unreliable for images built with ``dir2uf2 --fs-compact``,
+    which compact into the low blocks then ``fs_grow`` to the device size — the
+    stored count may reflect the pre-grow size. Prefer the partition size.
+    """
+    if len(data) >= 0x20 and data[8:16] == LFS_MAGIC:
+        bc = struct.unpack_from("<I", data, 0x1C)[0]
+        if 0 < bc <= (1 << 24):
+            return bc
+    return None
+
+
+def _mount_with(data: bytes, block_size, read_size, prog_size, block_count) -> LittleFS:
     fs = LittleFS(
         block_size=block_size, block_count=block_count,
         read_size=read_size, prog_size=prog_size, mount=False,
     )
-    buf = fs.context.buffer
+    buf = fs.context.buffer  # pre-sized to block_size * block_count
     n = min(len(buf), len(data))
     buf[:n] = data[:n]
+    if len(buf) > n:  # pad the unwritten tail as erased flash (0xFF)
+        buf[n:] = b"\xff" * (len(buf) - n)
     fs.mount()
     return fs
+
+
+def mount(data: bytes, block_size: int = DEFAULT_BLOCK_SIZE,
+          read_size: int = DEFAULT_READ_SIZE, prog_size: int = DEFAULT_PROG_SIZE,
+          block_count: int | None = None) -> LittleFS:
+    """Mount a LittleFS image, trying the most reliable block counts in turn.
+
+    ``block_count`` (from the bi_decl partition size) is tried first because it
+    is authoritative for ``--fs-compact`` images whose superblock count is
+    stale; the superblock value and the raw buffer length are tried as
+    fallbacks. The backing buffer is padded with 0xFF so a truncated dump (only
+    the used low blocks captured) still mounts.
+    """
+    candidates: list[int] = []
+    for c in (block_count, superblock_block_count(data, block_size),
+              max(1, len(data) // block_size)):
+        if c and 0 < c <= (1 << 24) and c not in candidates:
+            candidates.append(c)
+
+    last_err: Exception | None = None
+    for c in candidates:
+        try:
+            return _mount_with(data, block_size, read_size, prog_size, c)
+        except Exception as e:  # try the next candidate geometry
+            last_err = e
+    raise last_err if last_err else RuntimeError("no block_count candidates")
 
 
 def list_files(fs: LittleFS) -> list[LfsFile]:

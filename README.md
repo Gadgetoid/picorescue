@@ -84,3 +84,20 @@ src/picorescue/
   carve.py    Python-source carver
   cli.py      click CLI
 ```
+
+## Support Me
+
+I work on Pico shinies by day, occasionally cranking out balmy tools to make my job easier and sharing them with the world.
+
+If they help you too, great! If you want to throw me a bone for my troubles, see below:
+
+* Ko-Fi - https://ko-fi.com/gadgetoid
+* GitHub - https://github.com/sponsors/Gadgetoid
+* Patreon - https://www.patreon.com/c/gadgetoid
+* PayPal - https://www.paypal.com/paypalme/gadgetoid
+
+Find some of my other projects below:
+
+* dir2uf2 - Pack a directory and append it to a MicroPython uf2 - https://github.com/gadgetoid/dir2uf2
+* py_decl - Python code to read Pico's binary declaration format - https://github.com/gadgetoid/py_decl
+* Pico pinouts - https://pico.pinout.xyz 
